@@ -7,11 +7,11 @@
     "watch": "tsc -w",
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
-    "prestart": "npm run build",
-    "start": "node .",
-    "pretest": "npm run build",
-    "test": "jest --config jest.config.js --detectOpenHandles",
-    "format": "./node_modules/.bin/tslint --project . --fix ; ./node_modules/.bin/prettier --write 'src/**/*.{ts}'"
+    "start": "build debug=* && ts-node-dev --respawn --transpileOnly ./src/index.ts",
+    "prod": "build && node ./dist/src/index.js",
+    "test": "build && jest --config jest.config.js --detectOpenHandles",
+    "format": "./node_modules/.bin/tslint --project . --fix ; ./node_modules/.bin/prettier --write \"src/**/*.ts\"",
+    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run"
   },
   "author": "didjo972",
   "license": "ISC",
@@ -40,6 +40,7 @@
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
     "supertest": "^4.0.2",
+    "ts-node-dev": "^1.0.0-pre.44",
     "tslint": "^5.20.1",
     "typescript": "^3.7.5"
   }
