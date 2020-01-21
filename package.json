@@ -8,7 +8,7 @@
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
     "prestart": "npm run build",
-    "start": "node dist/server.js",
+    "start": "node .",
     "pretest": "npm run build",
     "test": "jest --config jest.config.js --detectOpenHandles",
     "format": "./node_modules/.bin/tslint --project . --fix ; ./node_modules/.bin/prettier --write 'src/**/*.{ts}'"
@@ -16,11 +16,25 @@
   "author": "didjo972",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.1",
+    "class-validator": "^0.11.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.21.2",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^7.17.1",
+    "reflect-metadata": "^0.1.10",
+    "typeorm": "0.2.22"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/body-parser": "^1.17.1",
+    "@types/cors": "^2.8.6",
     "@types/express": "^4.17.2",
+    "@types/helmet": "0.0.45",
     "@types/jest": "^24.9.0",
+    "@types/jsonwebtoken": "^8.3.6",
     "@types/node": "^13.1.8",
     "@types/supertest": "^2.0.8",
     "jest": "^24.9.0",
