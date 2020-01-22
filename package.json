@@ -7,9 +7,9 @@
     "watch": "tsc -w",
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
-    "start": "build debug=* && ts-node-dev --respawn --transpileOnly ./src/index.ts",
-    "prod": "build && node ./dist/src/index.js",
-    "test": "build && jest --config jest.config.js --detectOpenHandles",
+    "start": "npm run build && ts-node-dev --respawn --transpileOnly ./src/index.ts",
+    "prod": "npm run build && node ./dist/src/index.js",
+    "test": "npm run build && jest --config jest.config.js --detectOpenHandles",
     "format": "./node_modules/.bin/tslint --project . --fix ; ./node_modules/.bin/prettier --write \"src/**/*.ts\"",
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run"
   },

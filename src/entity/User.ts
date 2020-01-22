@@ -6,33 +6,33 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Unique, Updat
 @Unique(["username"])
 export class User {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number;
 
   @Column()
   @Length(4, 20)
-  username: string;
+  public username: string;
 
   @Column()
   @Length(4, 100)
-  password: string;
+  public password: string;
 
   @Column()
   @IsNotEmpty()
-  role: string;
+  public role: string;
 
   @Column()
   @CreateDateColumn()
-  createdAt: Date;
+  public createdAt: Date;
 
   @Column()
   @UpdateDateColumn()
-  updatedAt: Date;
+  public updatedAt: Date;
 
-  hashPassword() {
+  public hashPassword() {
     this.password = bcrypt.hashSync(this.password, 8);
   }
 
-  checkIfUnencryptedPasswordIsValid(unencryptedPassword: string) {
+  public checkIfUnencryptedPasswordIsValid(unencryptedPassword: string) {
     return bcrypt.compareSync(unencryptedPassword, this.password);
   }
 }
