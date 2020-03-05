@@ -6,11 +6,15 @@
   "password": "awimmo_20200101",
   "database": "awimmo",
   "synchronize": true,
-  "logging": false,
+  "logging": true,
   "entities": [
-    "dist/src/entity/**/*.js"
+    "dist/src/entity/**/*.{ts,js}"
   ],
   "cli": {
-    "entitiesDir": "src/entity"
-  }
+    "entitiesDir": "src/entity",
+    "migrationsDir": "migration"
+  },
+  "migrations": [
+    "dist/src/migration/**/.{ts,js}"
+  ]
 }

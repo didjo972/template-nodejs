@@ -4,12 +4,13 @@ import * as jwt from "jsonwebtoken";
 import { getRepository } from "typeorm";
 import config from "../config/config";
 import { User } from "../entity/User";
+import { IChangePasswordRequest, ILoginRequest } from "../shared/interfaces";
 
 class AuthController {
   public static login = async (req: Request, res: Response) => {
     // Check if username and password are set
-    const { username, password } = req.body;
-    if (!(username && password)) {
+    const { email, password }: ILoginRequest = req.body;
+    if (!(email && password)) {
       res.status(400).send();
     }
 
@@ -17,7 +18,7 @@ class AuthController {
     const userRepository = getRepository(User);
     let user: User;
     try {
-      user = await userRepository.findOneOrFail({ where: { username } });
+      user = await userRepository.findOneOrFail({ where: { email } });
     } catch (error) {
       res.status(401).send();
     }
@@ -30,13 +31,14 @@ class AuthController {
 
     // Sing JWT, valid for 1 hour
     const token = jwt.sign(
-      { userId: user.id, username: user.username },
+      { userId: user.id, email: user.email, username: user.username },
       config.jwtSecret,
       { expiresIn: "1h" }
     );
 
     // Send the jwt in the response
-    res.send(token);
+    res.setHeader("Authorization", "Bearer " + token);
+    res.status(200).send();
   }
 
   public static changePassword = async (req: Request, res: Response) => {
@@ -44,7 +46,7 @@ class AuthController {
     const id = res.locals.jwtPayload.userId;
 
     // Get parameters from the body
-    const { oldPassword, newPassword } = req.body;
+    const { oldPassword, newPassword }: IChangePasswordRequest = req.body;
     if (!(oldPassword && newPassword)) {
       res.status(400).send();
     }

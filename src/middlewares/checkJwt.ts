@@ -4,11 +4,12 @@ import config from "../config/config";
 
 export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
   // Get the jwt token from the head
-  const token = req.headers.auth as string;
+  let token = req.headers.authorization as string;
   let jwtPayload;
 
   // Try to validate the token and get data
   try {
+    token = token.startsWith("Bearer ") && token.substr(7);
     jwtPayload = (jwt.verify(token, config.jwtSecret) as any);
     res.locals.jwtPayload = jwtPayload;
   } catch (error) {
