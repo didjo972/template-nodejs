@@ -25,6 +25,9 @@ export class User {
   public role: string;
 
   @Column()
+  public phone: number;
+
+  @Column()
   @CreateDateColumn()
   public createdAt: Date;
 

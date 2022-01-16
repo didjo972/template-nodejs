@@ -7,11 +7,12 @@
     "watch": "tsc -w",
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
-    "start": "npm run build && ts-node-dev --respawn --transpileOnly ./src/index.ts",
+    "start": "npm run build && ts-node-dev --respawn --transpile-only --debug ./src/index.ts",
     "prod": "npm run build && node ./dist/src/index.js",
     "test": "npm run build && jest --config jest.config.js --detectOpenHandles",
     "format": "./node_modules/.bin/tslint --project . --fix ; ./node_modules/.bin/prettier --write \"src/**/*.ts\"",
-    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run"
+    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
+    "migration:create": "ts-node ./node_modules/typeorm/cli.js migration:create -n"
   },
   "author": "didjo972",
   "license": "ISC",
@@ -24,6 +25,7 @@
     "express": "^4.17.1",
     "helmet": "^5.0.1",
     "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1",
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
     "typeorm": "0.2.41"
@@ -38,10 +40,11 @@
     "@types/jsonwebtoken": "^8.3.6",
     "@types/node": "^13.1.8",
     "@types/supertest": "^2.0.8",
+    "@types/validator": "^13.7.1",
     "jest": "^27.4.7",
     "prettier": "^1.19.1",
     "supertest": "^4.0.2",
-    "ts-node-dev": "^1.0.0-pre.44",
+    "ts-node-dev": "^1.1.8",
     "tslint": "^5.20.1",
     "typescript": "^3.7.5"
   }
