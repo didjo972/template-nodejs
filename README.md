@@ -61,6 +61,7 @@ npm run start
 ```
 Open your local browser and verify the sample node api sample is working by accessing :
 `http://localhost:3000/public`
+`http://localhost:3000/api-docs/#/`
 
 Production
 ----------

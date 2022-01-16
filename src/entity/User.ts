@@ -1,7 +1,51 @@
 import * as bcrypt from "bcryptjs";
-import { IsEmail, IsNotEmpty, Length } from "class-validator";
+import { IsEmail, IsNotEmpty, Length, IsOptional } from "class-validator";
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from "typeorm";
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: number
+ *           readOnly: true
+ *           description: The user ID in DB.
+ *           example: "76538276"
+ *         email:
+ *           type: sring
+ *           description: The user email.
+ *           example: "toto@mail.com"
+ *         username:
+ *           type: string
+ *           description: The username.
+ *           example: "toto"
+ *         password:
+ *           type: string
+ *           writeOnly: true
+ *           description: The password.
+ *           example: "T0to35tl3plu5b0"
+ *         role:
+ *           type: string
+ *           description: The user's role.
+ *           example: "ADMIN"
+ *         phone:
+ *           type: string
+ *           description: The user's phone
+ *           example: "0780000000"
+ *         createdAt:
+ *           type: string
+ *           readOnly: true
+ *           format: date-time
+ *           description: The user's creation date
+ *         updatedAt:
+ *           type: string
+ *           readOnly: true
+ *           format: date-time
+ *           description: The user's update date
+ */
 @Entity()
 @Unique(["email"])
 export class User {
@@ -24,8 +68,9 @@ export class User {
   @IsNotEmpty()
   public role: string;
 
-  @Column()
-  public phone: number;
+  @Column({ nullable: true })
+  @IsOptional()
+  public phone: string;
 
   @Column()
   @CreateDateColumn()

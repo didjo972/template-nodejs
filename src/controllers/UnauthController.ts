@@ -10,6 +10,10 @@ class UnauthController {
         res.json({message: "Hello World !"});
     }
 
+    public static ping = (req: Request, res: Response) => {
+        res.json({isAlive: true});
+    }
+
     public static newUser = async (req: Request, res: Response) => {
         // Get parameters from the body
         const { username, password, email }: ICreateUserRequest = req.body;

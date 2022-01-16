@@ -7,7 +7,7 @@ import user from "./user";
 const routes = Router();
 
 routes.use("/auth", auth);
-routes.use("/user", user);
+routes.use("/users", user);
 routes.use("/public", unauth);
 routes.use("/", error);
 

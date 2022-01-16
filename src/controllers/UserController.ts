@@ -24,8 +24,9 @@ class UserController {
         const userRepository = getRepository(User);
         try {
             const user = await userRepository.findOneOrFail(id, {
-                select: ["id", "username", "role"] // We dont want to send the password on response
+                select: ["id", "username", "role", "phone"] // We dont want to send the password on response
             });
+            res.send(user);
         } catch (error) {
             res.status(404).send("User not found");
         }
@@ -36,7 +37,7 @@ class UserController {
         const id = req.params.id;
 
         // Get values from the body
-        const {username, role} = req.body;
+        const {username, role, phone} = req.body;
 
         // Try to find user on database
         const userRepository = getRepository(User);
@@ -50,8 +51,17 @@ class UserController {
         }
 
         // Validate the new values on model
-        user.username = username;
-        user.role = role;
+        if (phone) {
+            user.phone = phone;
+        }
+
+        if (username) {
+            user.username = username;
+        }
+        
+        if (role) {
+            user.role = role;
+        }
         const errors = await validate(user);
         if (errors.length > 0) {
             res.status(400).send(errors);
