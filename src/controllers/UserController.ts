@@ -58,7 +58,7 @@ class UserController {
         if (username) {
             user.username = username;
         }
-        
+
         if (role) {
             user.role = role;
         }

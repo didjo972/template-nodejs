@@ -1,5 +1,5 @@
 // start the Express server
-import { app } from "./index";
+import { app } from "./app";
 const defaultPort = 7000; // default port to listen
 
 class Server {

@@ -35,7 +35,7 @@ router.get("/", UnauthController.helloWorld);
  *          description: Ping
  */
 // Ping
-router.get("/ping", UnauthController.ping)
+router.get("/ping", UnauthController.ping);
 
 /**
  * @swagger
@@ -50,7 +50,7 @@ router.get("/ping", UnauthController.ping)
  *              application/json:
  *                  schema:
  *                      $ref: "#/components/schemas/User"
- *                      
+ *
  *      responses:
  *        "200":
  *          description: The created account

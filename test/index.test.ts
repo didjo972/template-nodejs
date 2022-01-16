@@ -4,7 +4,7 @@ test("demo", () => {
 });
 
 import request from "supertest";
-import { app } from "../src";
+import { app } from "../src/app";
 
 test("GET /", (done) => {
     request(app)

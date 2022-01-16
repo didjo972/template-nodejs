@@ -1,5 +1,5 @@
 import * as bcrypt from "bcryptjs";
-import { IsEmail, IsNotEmpty, Length, IsOptional } from "class-validator";
+import { IsEmail, IsNotEmpty, IsOptional, Length } from "class-validator";
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from "typeorm";
 
 /**
