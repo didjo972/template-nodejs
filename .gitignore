@@ -11,3 +11,5 @@
 /db-data/
 
 /coverage/
+
+.DS_Store

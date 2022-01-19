@@ -55,3 +55,16 @@ services:
       - ./db-data/:/var/lib/mysql
 
     # restart: always
+
+  # Mailhog service
+  # Uncomment to run the dev server mail
+  # mailhog:
+    # image: 'mailhog/mailhog'
+
+    # container_name: 'mailhog'
+
+    # the SMTP server starts on port 1025
+    # the HTTP server starts on port 8025
+    # ports:
+      # - "1025:1025"
+      # - "8025:8025"

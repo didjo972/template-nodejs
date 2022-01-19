@@ -53,6 +53,12 @@ Then run this command
 docker-compose up
 ```
 
+Mail Server config
+-----------------
+[Mailhog](https://github.com/mailhog/MailHog)\
+To use all the functionnalities of this template, you need to use a mail server.\ If you don't have one, like the DB, you can use the docker-compose and uncomment the mailhog lines. It will provide you a mail server that you can access on port 1025 for the SMTP server and on port 8025 for the HTTP server.
+Try it on `http://localhost:8025/`
+
 Start
 -----
 To start, the app need to connect to the DB. It will failed if the db is not up or if the credentials are not correct.
