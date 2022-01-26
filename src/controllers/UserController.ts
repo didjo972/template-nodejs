@@ -96,6 +96,7 @@ class UserController {
         // After all send a 204 (no content, but accepted) response
         res.status(204).send();
     }
+
 }
 
 export default UserController;

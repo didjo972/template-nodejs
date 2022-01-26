@@ -7,6 +7,7 @@ import { User } from "../entity/User";
 import { IChangePasswordRequest, ILoginRequest } from "../shared/interfaces";
 
 class AuthController {
+
   public static login = async (req: Request, res: Response) => {
     // Check if username and password are set
     const { email, password }: ILoginRequest = req.body;

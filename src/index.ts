@@ -1,8 +1,9 @@
 import { createConnection } from "typeorm";
+import { ormconfig } from "../ormconfig";
 import Server from "./server";
 
 // Connectes to the database -> then start the express app
-createConnection()
+createConnection(ormconfig)
   .then(async (connection) => {
     Server.runServe(3000);
   })

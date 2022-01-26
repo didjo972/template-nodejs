@@ -52,7 +52,7 @@ router.get("/ping", UnauthController.ping);
  *                      $ref: "#/components/schemas/User"
  *
  *      responses:
- *        "200":
+ *        "201":
  *          description: The created account
  *          content:
  *              application/json:
@@ -61,5 +61,28 @@ router.get("/ping", UnauthController.ping);
  */
 // Create an account
 router.post("/createAccount", UnauthController.newUser);
+
+/**
+ * @swagger
+ * path:
+ * /public/resetPassword:
+ *    post:
+ *      summary: Reset the password
+ *      tags: [Unauth]
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          email:
+ *                              type: string
+ *      responses:
+ *        "200":
+ *          description: The request to reset the mail has been sent
+ */
+// Reset password
+router.post("/resetPassword", UnauthController.resetPassword);
 
 export default router;
