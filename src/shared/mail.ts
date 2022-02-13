@@ -46,7 +46,7 @@ class MailService {
       text: bodyText, // The texte content of the mail
       html: bodyHtml, // The html content
     };
-    this.transporter.sendMail(mailOptions).catch(e => {
+    this.transporter.sendMail(mailOptions).catch((e) => {
       // tslint:disable-next-line:no-console
       console.error(e);
       throw new MailError("An error occured on sending mail");

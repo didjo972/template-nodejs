@@ -1,9 +1,9 @@
 import { validate } from "class-validator";
 import { Request, Response } from "express";
-import * as jwt from "jsonwebtoken";
 import { getRepository } from "typeorm";
-import config from "../config/config";
+
 import { User } from "../entity/User";
+import { createTokens } from "../middlewares/jwt";
 import { IChangePasswordRequest, ILoginRequest } from "../shared/interfaces";
 
 class AuthController {
@@ -31,14 +31,11 @@ class AuthController {
     }
 
     // Sing JWT, valid for 1 hour
-    const token = jwt.sign(
-      { userId: user.id, email: user.email, username: user.username },
-      config.jwtSecret,
-      { expiresIn: "1h" }
-    );
+    const [token, refreshToken] = await createTokens(user, process.env.jwtSecret, user.refreshSecret);
 
     // Send the jwt in the response
     res.setHeader("Authorization", "Bearer " + token);
+    res.setHeader("x-refresh-token", "Bearer " + refreshToken);
     res.status(200).send();
   }
 
@@ -74,11 +71,13 @@ class AuthController {
       res.status(400).send(errors);
       return;
     }
-    // Hash the new password and save
+    // Hash the new password, create the new refresh secret and save
     user.hashPassword();
+    user.createOrUpdateRefreshSecret();
     userRepository.save(user);
 
     res.status(204).send();
   }
-}
+
+ }
 export default AuthController;

@@ -1,7 +1,6 @@
 import { Router } from "express";
 import UserController from "../controllers/UserController";
-import { checkJwt } from "../middlewares/checkJwt";
-import { checkRole } from "../middlewares/checkRole";
+import { checkJwt, checkRole } from "../middlewares/jwt";
 
 /**
  * @swagger
@@ -60,7 +59,7 @@ router.get("/", [checkJwt, checkRole(["ADMIN"])], UserController.listAll);
 // Get one user
 router.get(
     "/:id([0-9]+)",
-    [checkJwt, checkRole(["ADMIN"])],
+    [checkJwt],
     UserController.getOneById
   );
 

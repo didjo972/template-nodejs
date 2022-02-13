@@ -1,6 +1,7 @@
 import { validate } from "class-validator";
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
+
 import { User } from "../entity/User";
 import { MailError } from "../shared/errors/MailError";
 import { ICreateUserRequest, IResetPasswordRequest } from "../shared/interfaces";
@@ -34,6 +35,9 @@ class UnauthController {
 
         // Hash the password, to securely store on DB
         user.hashPassword();
+
+        // Create the refresh secret
+        user.createOrUpdateRefreshSecret();
 
         // Try to save. If fails, the username is already in use
         const userRepository = getRepository(User);

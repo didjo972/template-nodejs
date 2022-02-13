@@ -1,4 +1,6 @@
 import * as bcrypt from "bcryptjs";
+import { v4 as uuidv4 } from "uuid";
+
 import { IsEmail, IsNotEmpty, IsOptional, Length } from "class-validator";
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from "typeorm";
 
@@ -65,6 +67,9 @@ export class User {
   public password: string;
 
   @Column()
+  public refreshSecret: string;
+
+  @Column()
   @IsNotEmpty()
   public role: string;
 
@@ -84,7 +89,15 @@ export class User {
     this.password = bcrypt.hashSync(this.password, 8);
   }
 
+  public createOrUpdateRefreshSecret() {
+    this.refreshSecret = uuidv4();
+  }
+
   public checkIfUnencryptedPasswordIsValid(unencryptedPassword: string) {
+    // tslint:disable-next-line:no-console
+    console.log(unencryptedPassword);
+    // tslint:disable-next-line:no-console
+    console.log(this.password);
     return bcrypt.compareSync(unencryptedPassword, this.password);
   }
 }
