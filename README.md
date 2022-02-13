@@ -47,6 +47,7 @@ MYSQL_DATABASE: 'yourschema'
 MYSQL_USER: 'username'
 # The MaridaDB password (useful to connect to the database)
 MYSQL_PASSWORD: 'somepassword'
+jwtSecret = 'your jwtSecret token'
 ```
 Then run this command
 ```
